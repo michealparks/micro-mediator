@@ -4,7 +4,7 @@ A compact, performant pub/sub module.
 Usage (using ES6):
 
 ```javascript
-import {publish, subscribe} from 'mediator';
+import {publish, subscribe, unsubscribe} from 'mediator';
 
 const id = subscribe('event', (data) => {
   console.log(`My pubsub module is ${data.msg}`);
