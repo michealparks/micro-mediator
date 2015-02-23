@@ -1,0 +1,9 @@
+{
+    "name": "micro-mediator",
+    "repo": "michealparks/micro-mediator",
+    "version": "0.1.0",
+    "scripts": [
+      "micro-mediator-es6.js",
+      "micro-mediator.js"
+    ]
+}
