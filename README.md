@@ -16,3 +16,11 @@ publish('event', {
 
 unsubscribe('event', id);
 ```
+
+If you prefer importing defaults:
+
+```javascript
+import Mediator from 'mediator';
+
+const id = Mediator.subscribe('event' (e) => console.log(e));
+```
