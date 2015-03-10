@@ -1,63 +1,39 @@
-define('mediator', [], function () {
-  'use strict';
+let channels = new Map();
+let idProvider = 0;
 
-  var channels = new Map();
-  var idProvider = 0;
+export function publish (name, data) {
+  let channel = channels.get(name);
+  
+  if (! channel) return;
 
-  function spliceArray(arr, index) {
-    if (index < (arr.length - 1)) {
-      arr[index] = arr.pop();
-    } else {
-      arr.pop()
+  for (let i = 0, il = channel.length; i < il; i++) {
+    channel[i](data);
+  }
+}
+
+export function subscribe (name, func) {
+  func.id = ++idProvider;
+  if (! channels.has(name)) channels.set(name, []);
+  channels.get(name).push(func);
+  return idProvider;
+}
+
+export function unsubscribe (name, id) {
+  let channel = channels.get(name);
+  let result = false;
+
+  if (! channel) throw new Error('No channel to unsubscribe from.');
+
+  for (let i = 0, il = channel.length; i < il; i++) {
+    if (channel[i].id === id) {
+      channel.splice(i, 1);
+      result = true;
+      break;
     }
   }
 
-  function publish(name, data) {
-    var channel = channels.get(name);
-    
-    if (! channel) return;
+  if (! result) throw new Error('No listener was unsubscribed.');
+}
 
-    for (var i = 0, il = channel.length; i < il; i++) {
-      channel[i](data);
-    }
-  }
+export default {publish, subscribe, unsubscribe};
 
-  function subscribe(name, func) {
-    func.id = ++idProvider;
-
-    if (! channels.has(name)) {
-      channels.set(name, []);
-    }
-
-    channels.get(name).push(func);
-
-    return idProvider;
-  }
-
-  function unsubscribe() {
-    var channel = channels.get(name);
-    var result = false;
-
-    if (! channel) {
-      throw new Error('No channel to unsubscribe from.');
-    }
-
-    for (var i = 0, il = channel.length; i < il; i++) {
-      if (channel[i].id === id) {
-        spliceArray(channel, i);
-        result = true;
-        break;
-      }
-    }
-
-    if (! result) {
-      throw new Error('No listener was unsubscribed.');
-    }
-  }
-
-  return {
-    publish: publish,
-    subscribe: subscribe,
-    unsubscribe: unsubscribe
-  };
-});

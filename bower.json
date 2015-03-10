@@ -1,0 +1,9 @@
+{
+  "name": "micro-mediator",
+  "version": "1.0.0",
+  "main": ["micro-mediator.js"],
+  "keywords": ["javascript", "mediator", "publish", "subscribe", "pubsub"]
+  "ignore": [],
+  "dependencies": {},
+  "devDependencies": {}
+}
