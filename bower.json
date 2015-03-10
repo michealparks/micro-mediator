@@ -1,9 +1,9 @@
 {
   "name": "micro-mediator",
   "version": "1.0.0",
-  "main": ["micro-mediator.js"],
+  "main": "micro-mediator.js",
   "keywords": ["javascript", "mediator", "publish", "subscribe", "pubsub", "es6", "ecmascript6"]
-  "ignore": [],
+  "ignore": ["component.json"],
   "dependencies": {},
   "devDependencies": {}
 }
