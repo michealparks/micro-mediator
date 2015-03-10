@@ -22,5 +22,5 @@ If you prefer importing defaults:
 ```javascript
 import Mediator from 'mediator';
 
-const id = Mediator.subscribe('event' (e) => console.log(e));
+const id = Mediator.subscribe('event', e => console.log(e));
 ```
