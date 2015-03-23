@@ -24,3 +24,9 @@ import Mediator from 'mediator';
 
 const id = Mediator.subscribe('event', e => console.log(e));
 ```
+
+Available via Bower:
+
+```
+bower install micro-mediator
+```
