@@ -1,32 +1,28 @@
 # micro-mediator
-A compact, performant pub/sub module.
-
-Usage (using ES6):
+A super tiny mediator for use with the publisher/subscribe pattern. Uses the [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) datatype. [Browser support](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map#Browser_compatibility) varies.
 
 ```javascript
-import {publish, subscribe, unsubscribe} from 'mediator';
+var mediator = new require('micro-mediator')
 
-const id = subscribe('event', (data) => {
-  console.log(`My pubsub module is ${data.msg}`);
-});
+mediator.on('party', function(data) {
+  console.log('INCOMING PARTY DATA: ' + data)
+})
 
-publish('event', {
-  msg: 'just. Absolutely. Incontrovertibly. Fascinating.'
-});
+mediator.emit('party', 'Chill bros arrived.')
 
-unsubscribe('event', id);
+mediator.
 ```
 
-If you prefer importing defaults:
+Or install the mediator to objects of interest.
 
 ```javascript
-import Mediator from 'mediator';
+var o = {}, m = new Mediator()
 
-const id = Mediator.subscribe('event', e => console.log(e));
+m.installTo(o)
+
+o.on('imminent asteroid imapct', console.log)
+
+m.emit('imminent asteroid impact', 'panic')
 ```
 
-Available via Bower:
-
-```
-bower install micro-mediator
-```
+If in a non commonjs environment, the mediator will attach itself to ```window```.
