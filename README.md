@@ -10,7 +10,7 @@ mediator.on('party', function(data) {
 
 mediator.emit('party', 'Chill bros arrived.')
 
-mediator.
+mediator.off('party')
 ```
 
 Or install the mediator to objects of interest.
