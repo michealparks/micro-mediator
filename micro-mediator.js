@@ -11,12 +11,16 @@
     map.forEach(function () {})
     map = undefined
   } catch (e) {
-    window.Map = window.Object
+    window.Map = function () {}
+    window.Map.prototype = Object
     window.Map.prototype.get = function (key) { return this[key] }
     window.Map.prototype.set = function (key, val) { this[key] = val }
     window.Map.prototype.has = function (key) { this[key] !== undefined }
     window.Map.prototype.forEach = function (fn) {
-      window.Object.keys(this).forEach(function (key) { fn(this[key]) })
+      var self = this
+      window.Object.keys(self).forEach(function (key) {
+        fn(self[key])
+      })
     }
   }
 
