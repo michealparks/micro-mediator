@@ -3,13 +3,17 @@ A super tiny mediator for use with the publisher/subscribe pattern. Uses the [Ma
 
 Use with browserify/webpack or just include and it'll install on `window`.
 
-Has the ability to use `subscribe` and `on` for subscription, `unsubscribe` and `off` for unsubscription, and `publish`, `emit`, and `trigger`.
+Call `.subscribe()` or `.on()` to listen to events,
+
+`.unsubscribe()` or `.off()` to unlisten, 
+
+and `.publish()`, `.emit()`, or `.trigger()` to fire events.
 
 ```javascript
-const Mediator = require('micro-mediator')
-const mediator = new Mediator()
+var Mediator = require('micro-mediator')
+var mediator = new Mediator()
 
-mediator.on('party', str => {
+mediator.on('party', function (str) {
   console.log(`INCOMING PARTY DATA: ${str}`)
 })
 
@@ -21,30 +25,22 @@ mediator.off('party')
 Or install the mediator to objects of interest.
 
 ```javascript
-const o = {}
-const m = new window.Mediator()
+var o = {}
+var m = new window.Mediator()
 
 m.installTo(o)
 
-o.on('imminent asteroid impact', console.log)
-
-o.emit('imminent asteroid impact', 'panic')
-```
-
-Configuration options with default values: 
-
-```javascript
-const m = new Mediator({
-  debug: false, // Displays additional console information
-  installTo: [] // Pass an array of objects to auto install
+o.on('imminent asteroid impact', function(action) {
+  console.log(action)
 })
 
+o.emit('imminent asteroid impact', 'panic')
 ```
 
 If you'd rather just install Mediator to an object rather than make instances, just pass this method a variadic number of objects:
 
 ```javascript
-Mediator.installTo(Object.prototype)
+Mediator.installTo(Object.prototype /* etc... */)
 
 var bob = {}
 
@@ -53,7 +49,9 @@ bob.on('romantic comedy viewing', action => console.log(action))
 bob.emit('romantic comedy viewing', 'cry')
 ```
 
-This will install a new mediator instance on each object. Or you could install to a single instance:
+This will install a new mediator instance on each object you pass. 
+
+You can also install to a single instance:
 
 ```javascript
 Mediator.installSingleInstanceTo(obj1, obj2, obj3)
