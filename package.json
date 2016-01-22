@@ -1,6 +1,6 @@
 {
   "name": "micro-mediator",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "description": "A really tiny mediator built with the map datatype.",
   "main": "micro-mediator.js",
   "scripts": {
